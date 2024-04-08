@@ -5,11 +5,19 @@ struct Velocity {
     value: Vec3,
 }
 
+struct SpaceshipPlugin;
+
+impl Plugin for SpaceshipPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(Startup, spawn_spaceship);
+    }
+}
+
 fn main() {
     App::new()
-        .add_systems(Startup, spawn_spaceship)
         .add_systems(Update, (update_position, print_position))
         .add_plugins(DefaultPlugins)
+        .add_plugins(SpaceshipPlugin)
         .run();
 }
 
