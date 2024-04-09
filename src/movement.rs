@@ -5,6 +5,12 @@ pub struct Velocity {
     pub value: Vec3,
 }
 
+#[derive(Bundle)]
+pub struct MovingObjectBundle {
+    pub velocity: Velocity,
+    pub model: SceneBundle,
+}
+
 pub struct MovementPlugin;
 
 impl Plugin for MovementPlugin {
