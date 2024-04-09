@@ -11,6 +11,11 @@ use spaceship::SpaceshipPlugin;
 
 fn main() {
     App::new()
+        .insert_resource(ClearColor(Color::rgb(0.1, 0.0, 0.15)))
+        .insert_resource(AmbientLight {
+            color: Color::default(),
+            brightness: 400.0,
+        })
         .add_plugins(DefaultPlugins)
         .add_plugins(CameraPlugin)
         .add_plugins(DebugPlugin)
