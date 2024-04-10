@@ -4,6 +4,7 @@ use bevy::prelude::*;
 use rand::Rng;
 
 use crate::movement::{Acceleration, Velocity, MovingObjectBundle};
+use crate::asset_loader::SceneAssets;
 
 const SPAWN_RANGE_X: Range<f32> = -25.0..25.0;
 const SPAWN_RANGE_Z: Range<f32> = 0.0..25.0;
@@ -27,7 +28,7 @@ impl Plugin for AsteroidPlugin {
     }
 }
 
-fn spawn_asteroid(mut commands: Commands, mut spawn_timer: ResMut<SpawnTimer>, time: Res<Time>, asset_server: Res<AssetServer>) {
+fn spawn_asteroid(mut commands: Commands, mut spawn_timer: ResMut<SpawnTimer>, time: Res<Time>, scene_assets: Res<SceneAssets>) {
     spawn_timer.timer.tick(time.delta());
     if !spawn_timer.timer.just_finished() {
         return;
@@ -51,7 +52,7 @@ fn spawn_asteroid(mut commands: Commands, mut spawn_timer: ResMut<SpawnTimer>, t
         velocity: Velocity::new(velocity),
         acceleration: Acceleration::new(acceleration),
         model: SceneBundle {
-            scene: asset_server.load("Enemy Flying.glb#Scene0"),
+            scene: scene_assets.asteroid.clone(),
             transform: Transform::from_translation(translation),
             ..default()
         },
